@@ -21,7 +21,7 @@ import javafx.stage.Window;
 
 public class GIF implements Initializable{
     @FXML private Window win;
-    @FXML private Button CON;
+    @FXML private Button CON,CON2;
     @FXML private Label Path, Path1;
 
     public void changeScreenButtonPusherMain1(ActionEvent event) throws IOException {
@@ -55,12 +55,17 @@ public class GIF implements Initializable{
             directoryPath = sd.getAbsolutePath();
             Path1.setText(directoryPath);
             CON.setDisable(false);
+           CON2.setDisable(false);
 
         }
 
     }
     public void ConvertGIF(ActionEvent event) throws IOException {
         Process process = Runtime.getRuntime().exec("cmd /c ffmpeg -i "+ filePath+" "+directoryPath+"//"+filename+".gif");
+    }
+    public void ConvertGIFWith(ActionEvent event) throws IOException {
+        Process process = Runtime.getRuntime().exec("cmd /c ffmpeg -i "+ filePath+" -vf palettegen "+directoryPath+"//"+filename+".png");
+        Process process2 = Runtime.getRuntime().exec("cmd /c ffmpeg -i "+ filePath+" -i "+filename+".png "+"-filter_complex \"[0][1]paletteuse\" "+" -y directoryPath"+"//"+filename+".gif");
     }
 
 

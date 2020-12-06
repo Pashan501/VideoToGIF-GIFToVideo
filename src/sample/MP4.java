@@ -21,7 +21,7 @@ import javafx.stage.Window;
 
 public class MP4 implements Initializable{
     @FXML private Window win;
-    @FXML private Button CON;
+    @FXML private Button CON,CON3;
     @FXML private Label Path, Path1;
     @FXML
     public void changeScreenButtonPusherMain2(ActionEvent event) throws IOException {
@@ -55,6 +55,7 @@ public class MP4 implements Initializable{
             directoryPath = sd.getAbsolutePath();
             Path1.setText(directoryPath);
             CON.setDisable(false);
+            CON3.setDisable(false);
 
         }
 
@@ -62,6 +63,10 @@ public class MP4 implements Initializable{
     @FXML
     public void ConvertToMP4(ActionEvent event) throws IOException {
         Process process = Runtime.getRuntime().exec("cmd /c ffmpeg -i "+ filePath+" "+directoryPath+"//"+filename+".mp4");
+    }
+    @FXML
+    public void ConvertToMP4WITH(ActionEvent event) throws IOException {
+        Process process2 = Runtime.getRuntime().exec("cmd /c ffmpeg -i "+ filePath+" -an -c copy "+directoryPath+"//"+filename+".mp4");
     }
 
 
